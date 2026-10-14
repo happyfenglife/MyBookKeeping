@@ -1,14 +1,13 @@
 import "dotenv/config";
 import { PrismaClient } from "../src/generated/prisma/client";
 import { PrismaBetterSqlite3 } from "@prisma/adapter-better-sqlite3";
+import { DEFAULT_USER_ID } from "../src/lib/constants";
 
 const databaseUrl = process.env.DATABASE_URL;
 if (!databaseUrl) {
   throw new Error("缺少环境变量 DATABASE_URL");
 }
 const prisma = new PrismaClient({ adapter: new PrismaBetterSqlite3({ url: databaseUrl }) });
-
-const DEFAULT_USER_ID = "default-user";
 
 const ACCOUNTS = [
   { key: "cash", name: "现金", type: "CASH" },
