@@ -1,0 +1,26 @@
+# 依赖
+node_modules/
+
+# Next.js 构建产物
+.next/
+out/
+build/
+
+# 环境变量（绝不能提交）
+.env
+.env*.local
+
+# SQLite 数据库文件（本地数据，不入库）
+prisma/*.db
+prisma/*.db-journal
+
+# 日志与缓存
+*.log
+npm-debug.log*
+tsconfig.tsbuildinfo
+
+# 编辑器/系统
+.DS_Store
+.idea/
+.vscode/*
+!.vscode/extensions.json
