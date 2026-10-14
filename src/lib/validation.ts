@@ -25,3 +25,10 @@ export const categoryCreateSchema = z.object({
 export const categoryRenameSchema = z.object({
   name: nameSchema,
 });
+
+export const accountInputSchema = z.object({
+  name: nameSchema,
+  type: z.enum(ACCOUNT_TYPES),
+  // 字段名带上单位，避免和数据库里的「分」混淆
+  initialBalanceYuan: moneyInputSchema,
+});

@@ -33,6 +33,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             <Link href="/categories" className="hover:underline">
               分类
             </Link>
+            <Link href="/accounts" className="hover:underline">
+              账户
+            </Link>
           </nav>
         </header>
         {/* 用 div 不用 main：页面自己已经渲染了一个 main，嵌套 main 是非法 HTML */}
