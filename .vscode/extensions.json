@@ -1,0 +1,12 @@
+{
+  "recommendations": [
+    "Prisma.prisma",
+    "bradlc.vscode-tailwindcss",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "usernamehw.errorlens",
+    "yoavbls.pretty-ts-errors",
+    "qwtel.sqlite-viewer",
+    "mikestead.dotenv"
+  ]
+}
