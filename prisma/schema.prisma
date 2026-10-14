@@ -1,0 +1,82 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Get a free hosted Postgres database in seconds: `npx create-db`
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model User {
+  id        String   @id @default(cuid())
+  name      String
+  createdAt DateTime @default(now())
+
+  accounts     Account[]
+  categories   Category[]
+  transactions Transaction[]
+}
+
+model Account {
+  id             String   @id @default(cuid())
+  userId         String
+  name           String
+  type           String // CASH | DEBIT | CREDIT | OTHER
+  initialBalance Int      @default(0) // 单位：分
+  archived       Boolean  @default(false)
+  createdAt      DateTime @default(now())
+
+  user          User          @relation(fields: [userId], references: [id])
+  transactions  Transaction[] @relation("AccountTransactions")
+  fromTransfers Transaction[] @relation("TransferFrom")
+  toTransfers   Transaction[] @relation("TransferTo")
+
+  @@index([userId])
+}
+
+model Category {
+  id        String   @id @default(cuid())
+  userId    String
+  name      String
+  kind      String // INCOME | EXPENSE
+  parentId  String? // v2 二层分类预留
+  archived  Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  user         User          @relation(fields: [userId], references: [id])
+  parent       Category?     @relation("CategoryTree", fields: [parentId], references: [id])
+  children     Category[]    @relation("CategoryTree")
+  transactions Transaction[]
+
+  @@index([userId])
+}
+
+model Transaction {
+  id            String   @id @default(cuid())
+  userId        String
+  type          String // EXPENSE | INCOME | TRANSFER
+  amount        Int // 恒为正数，单位：分
+  date          DateTime // 业务发生日期
+  categoryId    String?
+  accountId     String?
+  fromAccountId String?
+  toAccountId   String?
+  note          String?
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+
+  user        User      @relation(fields: [userId], references: [id])
+  category    Category? @relation(fields: [categoryId], references: [id])
+  account     Account?  @relation("AccountTransactions", fields: [accountId], references: [id])
+  fromAccount Account?  @relation("TransferFrom", fields: [fromAccountId], references: [id])
+  toAccount   Account?  @relation("TransferTo", fields: [toAccountId], references: [id])
+
+  @@index([userId, date])
+  @@index([accountId])
+  @@index([categoryId])
+}

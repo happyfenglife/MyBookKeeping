@@ -10,10 +10,6 @@ build/
 .env
 .env*.local
 
-# SQLite 数据库文件（本地数据，不入库）
-prisma/*.db
-prisma/*.db-journal
-
 # 日志与缓存
 *.log
 npm-debug.log*
@@ -27,3 +23,9 @@ tsconfig.tsbuildinfo
 
 # TypeScript 自动生成
 next-env.d.ts
+
+
+# SQLite 数据库文件（本地数据，不入库）
+*.db
+*.db-journal
+/generated/prisma
