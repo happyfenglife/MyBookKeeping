@@ -30,6 +30,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             <Link href="/" className="font-semibold">
               记账本
             </Link>
+            <Link href="/transactions/new" className="hover:underline">
+              记一笔
+            </Link>
             <Link href="/categories" className="hover:underline">
               分类
             </Link>

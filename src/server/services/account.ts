@@ -90,3 +90,12 @@ export async function archiveAccount(id: string) {
     throw new Error("账户不存在或已归档");
   }
 }
+
+/** 供下拉选择用的精简账户列表（不需要算余额） */
+export function listAccounts() {
+  return prisma.account.findMany({
+    where: { userId: DEFAULT_USER_ID, archived: false },
+    orderBy: { createdAt: "asc" },
+    select: { id: true, name: true },
+  });
+}
