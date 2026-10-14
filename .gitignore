@@ -24,3 +24,6 @@ tsconfig.tsbuildinfo
 .idea/
 .vscode/*
 !.vscode/extensions.json
+
+# TypeScript 自动生成
+next-env.d.ts
