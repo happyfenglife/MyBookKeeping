@@ -28,4 +28,4 @@ next-env.d.ts
 # SQLite 数据库文件（本地数据，不入库）
 *.db
 *.db-journal
-/generated/prisma
+/src/generated/prisma
